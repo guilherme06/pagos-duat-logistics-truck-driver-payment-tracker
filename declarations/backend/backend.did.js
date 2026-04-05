@@ -1,0 +1,147 @@
+export const idlFactory = ({ IDL }) => {
+  const CategorySummary = IDL.Record({
+    'categoryId' : IDL.Text,
+    'categoryName' : IDL.Text,
+    'totalAmount' : IDL.Int,
+    'tripCount' : IDL.Int,
+  });
+  const CategoryBreakdown = IDL.Record({
+    'categoryName' : IDL.Text,
+    'tripCount' : IDL.Int,
+  });
+  const EntryTypeSummary = IDL.Record({
+    'entryType' : IDL.Text,
+    'count' : IDL.Int,
+    'totalAmount' : IDL.Int,
+  });
+  const VisualSummaryWithBreakdown = IDL.Record({
+    'categories' : IDL.Vec(CategorySummary),
+    'title' : IDL.Text,
+    'imagePath' : IDL.Text,
+    'totalToReceive' : IDL.Int,
+    'categoryBreakdown' : IDL.Vec(CategoryBreakdown),
+    'expenses' : IDL.Int,
+    'message' : IDL.Text,
+    'categoryBreakdownText' : IDL.Text,
+    'netBalance' : IDL.Int,
+    'subtitle' : IDL.Text,
+    'entryTypes' : IDL.Vec(EntryTypeSummary),
+  });
+  const FileReference = IDL.Record({ 'hash' : IDL.Text, 'path' : IDL.Text });
+  const MonthlyBreakdown = IDL.Record({
+    'totalTrips' : IDL.Int,
+    'categorySummaries' : IDL.Vec(CategorySummary),
+    'entryTypeSummaries' : IDL.Vec(EntryTypeSummary),
+    'totalExpenses' : IDL.Int,
+    'totalExtras' : IDL.Int,
+    'netBalance' : IDL.Int,
+  });
+  const MonthlySummary = IDL.Record({
+    'month' : IDL.Int,
+    'totalToReceive' : IDL.Int,
+    'userId' : IDL.Text,
+    'expenses' : IDL.Int,
+    'timestamp' : IDL.Int,
+    'netBalance' : IDL.Int,
+  });
+  const OtrosEntry = IDL.Record({
+    'id' : IDL.Text,
+    'entryType' : IDL.Text,
+    'date' : IDL.Int,
+    'description' : IDL.Text,
+    'amount' : IDL.Int,
+  });
+  const TripCategory = IDL.Record({
+    'id' : IDL.Text,
+    'name' : IDL.Text,
+    'defaultAmount' : IDL.Int,
+  });
+  const TripRecord = IDL.Record({
+    'id' : IDL.Text,
+    'categoryId' : IDL.Text,
+    'date' : IDL.Int,
+    'amount' : IDL.Int,
+  });
+  const UserProfile = IDL.Record({
+    'salary' : IDL.Int,
+    'name' : IDL.Text,
+    'language' : IDL.Text,
+    'currency' : IDL.Text,
+    'companyName' : IDL.Text,
+    'monthlyGoal' : IDL.Int,
+  });
+  return IDL.Service({
+    'addOtrosEntry' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Int, IDL.Int, IDL.Text],
+        [IDL.Text],
+        [],
+      ),
+    'addPositivePhrase' : IDL.Func([IDL.Text], [], []),
+    'addTripCategory' : IDL.Func([IDL.Text, IDL.Text, IDL.Int], [IDL.Text], []),
+    'addTripRecord' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Int, IDL.Int],
+        [IDL.Text],
+        [],
+      ),
+    'createUserProfile' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Int, IDL.Text, IDL.Int],
+        [],
+        [],
+      ),
+    'deleteOtrosEntry' : IDL.Func([IDL.Text], [], []),
+    'deleteTripCategory' : IDL.Func([IDL.Text], [], []),
+    'deleteTripRecord' : IDL.Func([IDL.Text], [], []),
+    'dropFileReference' : IDL.Func([IDL.Text], [], []),
+    'exportVisualSummary' : IDL.Func(
+        [IDL.Text, IDL.Int],
+        [VisualSummaryWithBreakdown],
+        [],
+      ),
+    'generateVisualSummary' : IDL.Func(
+        [IDL.Text, IDL.Int],
+        [VisualSummaryWithBreakdown],
+        [],
+      ),
+    'getAllPositivePhrases' : IDL.Func([], [IDL.Vec(IDL.Text)], []),
+    'getFileReference' : IDL.Func([IDL.Text], [FileReference], []),
+    'getMonthlyBreakdown' : IDL.Func(
+        [IDL.Text, IDL.Int],
+        [MonthlyBreakdown],
+        [],
+      ),
+    'getMonthlySummary' : IDL.Func(
+        [IDL.Text, IDL.Int],
+        [IDL.Opt(MonthlySummary)],
+        [],
+      ),
+    'getOtrosEntries' : IDL.Func([IDL.Text], [IDL.Vec(OtrosEntry)], []),
+    'getRandomPositivePhrase' : IDL.Func([], [IDL.Text], []),
+    'getTripCategories' : IDL.Func([IDL.Text], [IDL.Vec(TripCategory)], []),
+    'getTripRecords' : IDL.Func([IDL.Text], [IDL.Vec(TripRecord)], []),
+    'getUserProfile' : IDL.Func([IDL.Text], [IDL.Opt(UserProfile)], []),
+    'listFileReferences' : IDL.Func([], [IDL.Vec(FileReference)], []),
+    'registerFileReference' : IDL.Func([IDL.Text, IDL.Text], [], []),
+    'saveMonthlySummary' : IDL.Func(
+        [IDL.Text, IDL.Int, IDL.Int, IDL.Int, IDL.Int],
+        [],
+        [],
+      ),
+    'updateOtrosEntry' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Int, IDL.Int, IDL.Text],
+        [],
+        [],
+      ),
+    'updateTripCategory' : IDL.Func([IDL.Text, IDL.Text, IDL.Int], [], []),
+    'updateTripRecord' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Int, IDL.Int],
+        [],
+        [],
+      ),
+    'updateUserProfile' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Int, IDL.Text, IDL.Int],
+        [],
+        [],
+      ),
+  });
+};
+export const init = ({ IDL }) => { return []; };

@@ -1,0 +1,55 @@
+{
+  "name": "Sistema de Pagos - Conductor de Camión",
+  "short_name": "Sistema de Pagos",
+  "description": "Aplicación de seguimiento de pagos para conductores de camión con soporte multiidioma",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "es",
+  "categories": ["business", "productivity", "finance"],
+  "icons": [
+    {
+      "src": "/assets/9561d64f-95a0-40e3-80a4-ee5a431ab632.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/9561d64f-95a0-40e3-80a4-ee5a431ab632.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Registrar Viaje",
+      "short_name": "Viaje",
+      "description": "Registrar un nuevo viaje",
+      "url": "/?shortcut=trip",
+      "icons": [
+        {
+          "src": "/assets/9561d64f-95a0-40e3-80a4-ee5a431ab632.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Ver Resumen",
+      "short_name": "Resumen",
+      "description": "Ver resumen mensual",
+      "url": "/?shortcut=overview",
+      "icons": [
+        {
+          "src": "/assets/9561d64f-95a0-40e3-80a4-ee5a431ab632.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+type VisualSummaryWithBreakdown = 
+ record {
+   categories: vec CategorySummary;
+   categoryBreakdown: vec CategoryBreakdown;
+   categoryBreakdownText: text;
+   entryTypes: vec EntryTypeSummary;
+   expenses: int;
+   imagePath: text;
+   message: text;
+   netBalance: int;
+   subtitle: text;
+   title: text;
+   totalToReceive: int;
+ };
+type UserProfile = 
+ record {
+   companyName: text;
+   currency: text;
+   language: text;
+   monthlyGoal: int;
+   name: text;
+   salary: int;
+ };
+type TripRecord = 
+ record {
+   amount: int;
+   categoryId: text;
+   date: int;
+   id: text;
+ };
+type TripCategory = 
+ record {
+   defaultAmount: int;
+   id: text;
+   name: text;
+ };
+type OtrosEntry = 
+ record {
+   amount: int;
+   date: int;
+   description: text;
+   entryType: text;
+   id: text;
+ };
+type MonthlySummary = 
+ record {
+   expenses: int;
+   month: int;
+   netBalance: int;
+   timestamp: int;
+   totalToReceive: int;
+   userId: text;
+ };
+type MonthlyBreakdown = 
+ record {
+   categorySummaries: vec CategorySummary;
+   entryTypeSummaries: vec EntryTypeSummary;
+   netBalance: int;
+   totalExpenses: int;
+   totalExtras: int;
+   totalTrips: int;
+ };
+type FileReference = 
+ record {
+   hash: text;
+   path: text;
+ };
+type EntryTypeSummary = 
+ record {
+   count: int;
+   entryType: text;
+   totalAmount: int;
+ };
+type CategorySummary = 
+ record {
+   categoryId: text;
+   categoryName: text;
+   totalAmount: int;
+   tripCount: int;
+ };
+type CategoryBreakdown = 
+ record {
+   categoryName: text;
+   tripCount: int;
+ };
+service : {
+  addOtrosEntry: (userId: text, description: text, amount: int, date: 
+   int, entryType: text) -> (text);
+  addPositivePhrase: (phrase: text) -> ();
+  addTripCategory: (userId: text, name: text, defaultAmount: int) -> (text);
+  addTripRecord: (userId: text, categoryId: text, amount: int, date: 
+   int) -> (text);
+  createUserProfile: (userId: text, name: text, companyName: text, salary:
+   int, language: text, monthlyGoal: int) -> ();
+  deleteOtrosEntry: (entryId: text) -> ();
+  deleteTripCategory: (categoryId: text) -> ();
+  deleteTripRecord: (recordId: text) -> ();
+  dropFileReference: (path: text) -> ();
+  exportVisualSummary: (userId: text, month: int) ->
+   (VisualSummaryWithBreakdown);
+  generateVisualSummary: (userId: text, month: int) ->
+   (VisualSummaryWithBreakdown);
+  getAllPositivePhrases: () -> (vec text);
+  getFileReference: (path: text) -> (FileReference);
+  getMonthlyBreakdown: (userId: text, month: int) -> (MonthlyBreakdown);
+  getMonthlySummary: (userId: text, month: int) -> (opt MonthlySummary);
+  getOtrosEntries: (userId: text) -> (vec OtrosEntry);
+  getRandomPositivePhrase: () -> (text);
+  getTripCategories: (userId: text) -> (vec TripCategory);
+  getTripRecords: (userId: text) -> (vec TripRecord);
+  getUserProfile: (userId: text) -> (opt UserProfile);
+  listFileReferences: () -> (vec FileReference);
+  registerFileReference: (path: text, hash: text) -> ();
+  saveMonthlySummary: (userId: text, month: int, totalToReceive: int,
+   expenses: int, netBalance: int) -> ();
+  updateOtrosEntry: (entryId: text, description: text, amount: int, date:
+   int, entryType: text) -> ();
+  updateTripCategory: (categoryId: text, name: text, defaultAmount: int) ->
+   ();
+  updateTripRecord: (recordId: text, categoryId: text, amount: int, date:
+   int) -> ();
+  updateUserProfile: (userId: text, name: text, companyName: text, salary:
+   int, language: text, monthlyGoal: int) -> ();
+}
